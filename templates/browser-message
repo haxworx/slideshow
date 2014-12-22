@@ -1,0 +1,20 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	  "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head><title>ImageFoolKit &copy;</title>
+<link href="default.css" rel="stylesheet" type="text/css" media="screen">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta name="description" content="No nonsense IT solutions for UNIX and Windows">
+<meta name="keywords" content="unix,linux,nonsense,solutions,experience,developers,openbsd,freebsd,netbsd,hurd,windows,nipl,haxworx,c,c++,perl, apache, mysql">
+</head>
+<body>
+<h1>Information</h1>
+<p>[% MESSAGE %]</p>
+<br>
+<a href="portal.cgi?action=logout">Login</a>
+<hr>
+<center>&copy; ImageFoolKit.</center>
+</body>
+</html>
+

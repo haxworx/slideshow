@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+	  "http://www.w3.org/TR/html4/loose.dtd">
+
+<htmlhead><title>myPortfolio (haxlab.org)</title><link href="default.css" rel="stylesheet" type="text/css" media="screen">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta name="description" content="No nonsense IT solutions for UNIX and Windows">
+<meta name="keywords" content="unix,linux,nonsense,solutions,experience,developers,openbsd,freebsd,netbsd,hurd,windows,nipl,haxworx,c,c++,perl, apache, mysql">
+<script language="Javascript">
+	function Reload() {
+		window.location.reload();
+	}
+</script>
+</head>
+<body onLoad="Reload()">
+ <script src="sorttable.js"></script> 
+<br>
+<table class="content" width="100%" style="border: none" align="center">
+<tr><td valign="top">
+<br>
+<div align="right">
+        <form name="logout" method="post" action="portal.cgi">
+        <input type="hidden" name="action" value="logout">
+        <input type="submit" value="Logout">
+        </form>
+</div>
+<table width="100%" style="border: none">
+<tr><td>
+<h1>myPortfolio &copy;</h1>
+<h3>Welcome [% DETAILS.name %]</h3>
+<h3>Photographs in: <a href="http://haxlab.org/myPortfolio/users/[% CWD %]">http://haxlab.org/myPortfolio/images/[% CWD %]</a></h3>
+<P><STRONG>Create a portfolio:</strong> <a href="/myPortfolio/edit.cgi?action=edit&filename=index.html&directory=[% CWD %]">Portfolio Editor</a></p>
+<h3>Edited Portfolio: <a href="http://haxlab.org/myPortfolio/users/[% CWD %]/portfolio.html">http://haxlab.org/myPortfolio/users/[% CWD %]/portfolio.html</a></h3>
+<p><strong>[% MESSAGE %]</strong></p>
+<p>Your photographs (only .jpg will be displayed on your portfolio page):</p>
+<form name="chdir" action="portal.cgi" method="post">
+<table>
+<tr><td>Change folder</td><td><select name="directory">
+				<optgroup label="Main folder">
+					<option>[% USERNAME %]</option>
+				</optgroup>
+				<optgroup label="Other folders">
+				[% IF dir == CWD %]
+				[% ELSE %]
+				<option selected>[% CWD %]</option> 
+				[% END %]
+			     [% FOREACH dir IN DIRS %]
+				[% IF dir  == CWD %]
+				[% ELSE %]
+				<option>[% USERNAME %]/[% dir %]</option>
+				[% END %]
+			     [% END %]
+				</optgroup></td></tr>
+<tr><td></td><td><input type="submit" value="Change folder"></td></tr>
+</table>
+</form>
+<tr><td>
+<p>You are using [% STORAGE %] of your [% QUOTA %] quota.</p>
+<hr>
+<form name="mkdir" action="portal.cgi" method="post">
+<input type="hidden" name="action" value="mkdir">
+<input type="hidden" name="username" value="[% DETAILS.username %]">
+<table>
+<tr><td>Create folder:</td><td><input type="text" name="directory"></td></tr>
+<tr><td></td><td><input type="submit" value="Create folder"></td></tr>
+</form>
+</table>
+<table><form name="rmdir" action="portal.cgi" method="post">
+<input type="hidden" name="action" value="rmdir">
+<input type="hidden" name="username" value="[% DETAILS.username %]">
+<tr valign="top"><td>Delete folder:</td><td><select name="directory">
+                             [% FOREACH dir IN DIRS %]
+                                [% IF dir != CWD %]
+                                <option>[% DETAILS.username %]/[% dir %]</option>
+                                [% END %]
+                             [% END %]
+				<option selected>[% CWD %]</option>
+				</select></td>
+<td><input type="submit" value="Delete folder"></td></tr>
+<tr valign="top"><td>
+</form>
+<h3>Upload Photograph or File (.jpg or .JPG) for web view.</h3>
+<form action="upload.cgi" method="post" enctype="multipart/form-data">
+<input type="file" name="upload">
+<input type="hidden" name="id" value="[% DETAILS.id %]">
+<input type="hidden" name="username" value="[% DETAILS.username %]">
+<input type="hidden" name="directory" value="[% CWD %]">
+<table>
+<tr valign="top"><td>Photograph description:</td><td><textarea name="description"></textarea></td></tr>
+</table>
+<input type="submit" value="Upload">
+</form>
+<br><br>
+</td></tr>
+</table>
+
+</td></tr>
+</table>
+</form>
+
+<div class="content" style="border: 1px solid #ababab;">
+<div style="height:400px;width:100%;overflow:scroll;">
+<table class="content" style="border: 1px solid #ababab;width:100%;">
+<thead>
+<tr><th>Image</th><th>Size</th><th>Delete</th></tr>
+</thead>
+<tbody>
+[% FOREACH file IN FILES %]
+        <td>
+        <form name="delete" method="post" action="portal.cgi">
+        <input type="hidden" value="delete" name="action">
+        <input type="hidden" name="directory" value="[% CWD %]">
+        <input type="hidden" value="[% DETAILS.username %]" name="username">
+        <a href="[% file.name %]"><img style="border: 1px solid #000000;" src="[% file.thumbnail %]"></a><input type="hidden" name="filename" value="[% file.name %]">
+        </td>
+        <td>
+                <p>[% file.size %]</p>
+        </td>
+        <td>
+        <input type="submit" value="Delete file">
+        </form>
+        <form name="description" method="post" action="portal.cgi">
+        <input type="hidden" name="filename" value="[% file.name %]">
+        <input type="hidden" name="action" value="description">
+        <input type="hidden" name="username" value="[% DETAILS.username %]">
+        <input type="hidden" name="directory" value="[% CWD %]">
+        <tr><td><textarea name="description">[% file.description %]</textarea></td></tr>
+        <tr><td>[% i = 0 %] [% WHILE i != file.number %]<img style="border: none;" src="img/star.jpg" alt="star">[% i = i + 1 %][% END %]
+        <tr><td><input type="submit" value="Update Details"> Order category: <select name="number">
+        [% IF file.number == 0 %]
+        <option value="0">uncategorised</option>
+        [% ELSE %]
+        <option>[% file.number %] stars</option>
+        [% END %]
+        <option value="5">5 stars</option>
+        <option value="4">4 stars</option>
+        <option value="3">3 stars</option>
+        <option value="2">2 stars</option>
+        <option value="1">1 star</option>
+</select>
+<br><br></td></tr>
+<td><hr></td><td><hr></td><td><hr></td></tr>
+        </form>
+[% END %]
+</tbody>
+</table>
+</div>
+</div>
+
+<tr><td>
+
+
+<form name="password" action="portal.cgi" method="post">
+<input type="hidden" name="action" value="password">
+<input type="hidden" name="username" value="[% DETAILS.username %]">
+<hr>
+<h2>Change Password</h2>
+<table>
+<tr><td>Password:</td><td><input type="password" name="password"></td></tr>
+<tr><td>Confirm:</td><td><input type="password" name="secondary"></td></tr>
+<tr><td><input type="submit" value="Change password"></td><td></td></tr>
+</table>
+
+<br>
+<center>&copy; myPortfolio.</center>
+</body>
+</html>
+

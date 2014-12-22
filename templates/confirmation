@@ -1,0 +1,26 @@
+Dear [% NAME %],
+
+Congratulations!
+
+Your account has been created at haxlab.org.
+
+You need to activate it first by following this link:
+
+http://haxlab.org/myPortfolio/a.cgi?key=[% KEY %]
+
+For reference:
+
+Username: [% USERNAME %]
+Password: [% PASSWORD %]
+
+You can store images or photographs (accessible via the web) from your
+control panel. Additionally create web pages with your images with our
+Web-based editor.
+
+The URL for your photographs is http://haxlab.net/myPortfolio/users/[% USERNAME %]/
+
+Login to the control panel at: http://haxlab.net/myPortfolio
+
+Best wishes,
+
+Haxlab.net Team

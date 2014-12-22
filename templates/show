@@ -1,0 +1,36 @@
+<html><head>
+<link href="/myPortfolio/default.css" rel="stylesheet" type="text/css" media="screen">
+
+<title>Images by [% USERNAME %]</title></head>
+<body>
+	<center><h1>Images by [% USERNAME %]</h1></center>
+<div id="wrap" align="center">
+<table><tr>
+[% count = 0 %]
+	[% FOREACH image IN PICTURES %]
+<td> 
+[% IF count == 5 %]
+[% count = 0 %]
+[% END %]
+<table id="poole">
+<div class="crop">
+<tr><td><a href="http://haxlab.org/myPortfolio/[% image.name %]"><img src="http://haxlab.org/myPortfolio/[% image.thumbnail %]" style="border: 1px solid #000000;"  alt="image"></a></td></tr>
+</div>
+<tr><td valign="top" style="word-wrap:break-word;">
+
+[% image.description %]
+</td></tr>
+<tr><td>
+[% i = 0 %] [% WHILE i != image.number %]<img src="/myPortfolio/img/star.png" style="border: none;" alt="star">[% i = i + 1 %][% END %]
+</td></tr>
+</table>
+[% count = count + 1 %]
+[% IF count == 5 %]
+</td></tr>
+[% END %]
+</td>
+	[% END %]
+</tr>
+</table>
+</body>
+</html>

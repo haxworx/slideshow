@@ -1,0 +1,20 @@
+<html><head><title>Images by [% USERNAME %]</title></head>
+<script src="editor/ckeditor.js"></script>
+</head>
+<body style="width: 1024px">
+<h1>myPortfolio &copy;</h1>
+<p><i>Customise the page to suit your needs and save. The URL to your creation can be found in the control panel to share.</i></p>
+<form method="post" name="edit" action="/myPortfolio/edit.cgi">
+<input type="hidden" name="filename" value="[% FILENAME %]">
+<input type="hidden" name="directory" value="[% DIRECTORY %]">
+<input type="hidden" name="action" value="save">
+<textarea class="ckeditor" style="height: 800px" name="text">
+[% HTML %]
+</textarea>
+<br>
+<input type="submit" name="sumit" value="Save">
+</form>
+</div>
+<center><p>&copy; myPortfolio.</p></center>
+</body>
+</html>

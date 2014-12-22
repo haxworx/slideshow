@@ -1,0 +1,19 @@
+<html>
+<head><title>myPortfolio [EPSILON]</title><link href="default.css" rel="stylesheet" type="text/css" media="screen">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta name="description" content="No nonsense IT solutions for UNIX and Windows">
+<meta name="keywords" content="unix,linux,nonsense,solutions,experience,developers,openbsd,freebsd,netbsd,hurd,windows,nipl,haxworx,c,c++,perl, apache, mysql">
+<body>
+
+
+
+[% FOREACH file IN PICTURES %]
+<div class="crop" style="display: inline;">
+        <a href="/myPortfolio/[% file.name %]"><img style="border: 1px solid #000000;" src="/myPortfolio/[% file.thumbnail %]"></a>
+<p>[% file.description %]</p>
+</div>
+[% END %]
+<center>&copy; myPortfolio.</center>
+</body>
+</html>
+
